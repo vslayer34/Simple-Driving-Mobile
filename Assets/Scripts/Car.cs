@@ -24,6 +24,9 @@ public class Car : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// Apply rotation to the car transform
+    /// </summary>
     private void SteerCar(float direction)
     {
         transform.Rotate(0.0f, direction * _turnRate * Time.deltaTime, 0.0f);
