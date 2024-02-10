@@ -6,6 +6,11 @@ using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
+    // Notifications
+    [SerializeField, Tooltip("Reference to the notification handler")]
+    private AndroidNotificationHandler _andoridNotification;
+
+
     // timed aspect of the energy recharge
     [SerializeField, Tooltip("How much time it needs to refill enery bar")]
     private int _energyRefillRate;
@@ -35,13 +40,30 @@ public class MainMenu : MonoBehaviour
 
     private void Start()
     {
-        _playBtn.onClick.AddListener(() => 
-        {
-            SceneManager.LoadScene(1);
-        });
-
         DisplayHighestScore();
         CheckEnergy();
+
+        _playBtn.onClick.AddListener(() => 
+        {
+            if (_currentEnergy < 1)
+            {
+                return;
+            }
+
+            _currentEnergy--;
+            PlayerPrefs.SetInt(_enregyKey, _currentEnergy);
+
+            if (_currentEnergy <= 0)
+            {
+                DateTime energyReady = DateTime.Now.AddMinutes(_energyRefillRate);
+                PlayerPrefs.SetString(_energyReadyKey, energyReady.ToString());
+                #if UNITY_ANDROID
+                _andoridNotification.SchedualGameReadyNotification(energyReady);
+                #endif
+            }
+
+            SceneManager.LoadScene(1);
+        });
     }
 
 
@@ -49,7 +71,7 @@ public class MainMenu : MonoBehaviour
     {
         _currentEnergy = PlayerPrefs.GetInt(_enregyKey, _maxEnergy);
 
-        if (_currentEnergy == 0)
+        if (_currentEnergy <= 0)
         {
             string energyReadyString = PlayerPrefs.GetString(_energyReadyKey, String.Empty);
 

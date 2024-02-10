@@ -766,6 +766,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1066639493}
   - component: {fileID: 1066639494}
+  - component: {fileID: 1066639495}
   m_Layer: 5
   m_Name: Main Menu
   m_TagString: Untagged
@@ -806,11 +807,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d10bfc0325d21b4faee2a05eb03fbdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _andoridNotification: {fileID: 1066639495}
   _energyRefillRate: 1
   _maxEnergy: 5
   _playBtn: {fileID: 1630983004}
   _playBtnTextField: {fileID: 1032674977}
   _highScoreTextField: {fileID: 148878758}
+--- !u!114 &1066639495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1066639492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e2e44e1f2c90604e9718c705592072a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1368366024
 GameObject:
   m_ObjectHideFlags: 0
