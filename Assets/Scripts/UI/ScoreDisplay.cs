@@ -19,4 +19,20 @@ public class ScoreDisplay : MonoBehaviour
 
         _scoreTextField.text = _score.ToString("0000");
     }
+
+
+    private void OnDestroy()
+    {
+        SaveCurrentHighScore();
+    }
+
+    private void SaveCurrentHighScore()
+    {
+        float currentHighScroe = PlayerPrefs.GetFloat("High Score", 0);
+
+        if (_score > currentHighScroe)
+        {
+            PlayerPrefs.SetFloat("High Score", _score);
+        }
+    }
 }
