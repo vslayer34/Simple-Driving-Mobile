@@ -806,7 +806,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d10bfc0325d21b4faee2a05eb03fbdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _energyRefillRate: 1
+  _maxEnergy: 5
   _playBtn: {fileID: 1630983004}
+  _playBtnTextField: {fileID: 1032674977}
   _highScoreTextField: {fileID: 148878758}
 --- !u!1 &1368366024
 GameObject:
