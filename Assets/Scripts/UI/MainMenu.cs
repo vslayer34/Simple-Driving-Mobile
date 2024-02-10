@@ -40,6 +40,17 @@ public class MainMenu : MonoBehaviour
 
     private void Start()
     {
+        OnApplicationFocus(true);
+    }
+
+    private void OnApplicationFocus(bool isFocused)
+    {
+        if (!isFocused)
+        {
+            return;
+        }
+
+        CancelInvoke();
         DisplayHighestScore();
         CheckEnergy();
 
@@ -87,8 +98,22 @@ public class MainMenu : MonoBehaviour
                 _currentEnergy = _maxEnergy;
                 PlayerPrefs.SetInt(_enregyKey, _currentEnergy);
             }
+            else
+            {
+                _playBtn.interactable = false;
+                Invoke(nameof(RefreshScreen), (energyReady - DateTime.Now).Seconds);
+            }
         }
 
+        _playBtnTextField.text = $"Play ({_currentEnergy})";
+    }
+
+
+    private void RefreshScreen()
+    {
+        _currentEnergy = _maxEnergy;
+        PlayerPrefs.SetInt(_enregyKey, _currentEnergy);
+        _playBtn.interactable = true;
         _playBtnTextField.text = $"Play ({_currentEnergy})";
     }
 
